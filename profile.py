@@ -49,7 +49,7 @@ clients = [create_node("client" + str(i)) for i in range(params.c)]
 
 # Create a link between them
 # Note: is this needed? Looks like that a default link is always already created.
-# link1 = request.Link(members=[monitor, osd1, osd2, osd3, mds] + clients)
+link1 = request.Link(members=[monitor, osd1, osd2, osd3, mds] + clients)
 
 # Abort execution if there are any errors, and report them.
 pc.verifyParameters()
