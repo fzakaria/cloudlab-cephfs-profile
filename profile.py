@@ -9,6 +9,14 @@ import geni.portal as portal
 # Import the ProtoGENI library.
 import geni.rspec.pg as pg
 
+
+def create_node(name):
+    node = request.RawPC("name")
+    bs = node.Blockstore("bs", "/ceph")
+    bs.size = "100GB"
+    return node
+
+
 # Create a portal context.
 pc = portal.Context()
 
@@ -27,20 +35,21 @@ if params.c < 1:
 request = pc.makeRequestRSpec()
 
 # Create a single monitor daemon
-monitor = request.RawPC("monitor")
+monitor = create_node("monitor")
 
 # Create three object storage daemons
-osd1 = request.RawPC("osd1")
-osd2 = request.RawPC("osd2")
-osd3 = request.RawPC("osd3")
+osd1 = create_node("osd1")
+osd2 = create_node("osd2")
+osd3 = create_node("osd3")
 
 # Create a single metadata daemon
-mds = request.RawPC("mds")
+mds = create_node("mds")
 
-clients = [request.RawPC("client" + str(i)) for i in range(params.c)]
+clients = [create_node("client" + str(i)) for i in range(params.c)]
 
 # Create a link between them
-link1 = request.Link(members=[monitor, osd1, osd2, osd3, mds] + clients)
+# Note: is this needed? Looks like that a default link is always already created.
+# link1 = request.Link(members=[monitor, osd1, osd2, osd3, mds] + clients)
 
 # Abort execution if there are any errors, and report them.
 pc.verifyParameters()
