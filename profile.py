@@ -12,6 +12,10 @@ import geni.rspec.pg as pg
 
 def create_node(name):
     node = request.RawPC(name)
+    nix_bs = node.Blockstore(name + "-nix-bs", "/nix")
+    nix_bs.size = "25GB"
+    data_bs = node.Blockstore(name + "-data-bs", "/data")
+    data_bs.size = "75GB"
     return node
 
 
