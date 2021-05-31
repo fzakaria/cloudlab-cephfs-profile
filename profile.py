@@ -12,8 +12,6 @@ import geni.rspec.pg as pg
 
 def create_node(name):
     node = request.RawPC(name)
-    bs = node.Blockstore("bs", "/ceph")
-    bs.size = "100GB"
     return node
 
 
