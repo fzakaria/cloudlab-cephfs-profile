@@ -12,7 +12,7 @@ import geni.rspec.pg as pg
 
 def create_node(name):
     node = request.RawPC(name)
-    node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS8-64-STD"
+    node.disk_image = "urn:publicid:IDN+utah.cloudlab.us+image+declstore-PG0:CENT8-CEPH-WIP"
     bs = node.Blockstore(name + "-data-bs", "/data")
     bs.size = "100GB"
     return node
